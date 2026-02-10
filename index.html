@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REJECTION Trade King 👑 | Royal VIP Edition</title>
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
             --royal-red: #ff0000;
-            --deep-ruby: #4a0000;
             --vip-gold: #ffd700;
-            --soft-gold: #ffec8b;
             --bg-black: #050000;
         }
 
@@ -29,16 +25,16 @@
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-black);
-            min-height: 100dvh; /* মোবাইলের জন্য ডাইনামিক হাইট */
+            min-height: 100dvh;
             display: flex;
             justify-content: center;
-            align-items: center;
+            /* নিচে নেমে যাওয়া বন্ধ করতে নিচের দুটি লাইন গুরুত্বপূর্ণ */
+            align-items: flex-start; 
+            padding-top: 25px; /* এখান থেকে আপনি কার্ডটি কতটুকু উপরে থাকবে তা ঠিক করতে পারবেন */
             overflow: hidden;
             color: white;
-            padding: 10px; /* চারদিকে কিছুটা স্পেস */
         }
 
-        /* --- Background Animation --- */
         .bg-wrapper {
             position: fixed;
             top: 0; left: 0;
@@ -47,78 +43,32 @@
             background: radial-gradient(circle at center, #1a0000 0%, #000 100%);
         }
 
-        .nebula {
-            position: absolute;
-            width: 150%; height: 150%;
-            top: -25%; left: -25%;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.12) 0%, rgba(74, 0, 0, 0.05) 40%, transparent 70%);
-            filter: blur(60px);
-            animation: moveNebula 15s infinite alternate ease-in-out;
-        }
-
-        @keyframes moveNebula {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(-5%, -5%) scale(1.1); }
-        }
-
-        .ember {
-            position: absolute;
-            background: var(--royal-red);
-            border-radius: 50%;
-            filter: blur(2px) drop-shadow(0 0 5px var(--royal-red));
-            animation: fly 10s infinite linear;
-            opacity: 0;
-        }
-
-        @keyframes fly {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.6; }
-            100% { transform: translateY(-20vh) translateX(100px); opacity: 0; }
-        }
-
-        /* --- VIP Card (Optimized Height) --- */
+        /* কার্ডের ডিজাইন */
         .card {
-            width: 95%;
+            width: 92%;
             max-width: 400px;
-            /* ফিক্সড হাইট এর বদলে ম্যাক্স হাইট ব্যবহার করা হয়েছে */
-            max-height: 95dvh; 
-            height: auto;
-            padding: 25px 20px;
-            border-radius: 60px 15px 60px 15px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.6) 100%);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            /* কার্ডের হাইট যেন স্ক্রিনের বাইরে না যায় */
+            max-height: 92dvh;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.8) 100%);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 0, 0, 0.25);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.9);
+            border-radius: 50px 15px 50px 15px;
+            padding: 25px 20px;
             text-align: center;
-            position: relative;
             display: flex;
             flex-direction: column;
-            overflow-y: auto; /* কন্টেন্ট বেশি হলে কার্ডের ভেতর স্ক্রল হবে */
-            transition: all 0.5s ease;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            overflow-y: auto;
         }
 
-        /* কার্ডের স্ক্রলবার লুকিয়ে ফেলা */
-        .card::-webkit-scrollbar { width: 0; display: none; }
+        /* স্ক্রলবার হাইড করা */
+        .card::-webkit-scrollbar { display: none; }
 
-        .card::before {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            border-radius: 62px 17px 62px 17px;
-            background: linear-gradient(45deg, transparent, var(--royal-red), transparent, var(--vip-gold), transparent);
-            z-index: -1;
-            animation: borderRotate 8s infinite linear;
-            opacity: 0.4;
-        }
-
-        @keyframes borderRotate { 100% { filter: hue-rotate(360deg); } }
-
-        /* --- Logo & Header Animation --- */
         .header-section {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             margin-bottom: 15px;
+            transition: 0.4s;
             flex-shrink: 0;
         }
 
@@ -130,35 +80,30 @@
 
         .crown-icon {
             font-size: 45px;
-            background: linear-gradient(to bottom, var(--soft-gold), var(--vip-gold), #b8860b);
+            background: linear-gradient(to bottom, #ffec8b, var(--vip-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
             animation: royalFloat 3s infinite ease-in-out;
         }
 
         @keyframes royalFloat {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.05); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .logo-text {
             font-family: 'Cinzel Decorative', serif;
             font-size: 22px;
             font-weight: 900;
-            color: #fff;
-            text-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
             margin-top: 5px;
-            line-height: 1.2;
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
         }
 
-        /* --- Content Layout --- */
         .content-body {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            min-height: 0; /* Important for flex child overflow */
         }
 
         .btn-group {
@@ -167,164 +112,109 @@
             gap: 10px;
         }
 
-        .info-area {
-            display: none; 
-            flex-direction: column;
-            text-align: left;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 15px;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            height: 380px; /* স্ক্রিনে ফিট করার জন্য উচ্চতা কিছুটা কমানো হয়েছে */
-            animation: slideUp 0.4s ease forwards;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .info-title {
-            color: var(--vip-gold);
-            font-weight: 800;
-            font-size: 14px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-            padding-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .info-scroll {
-            overflow-y: auto;
-            flex-grow: 1;
-            padding-right: 5px;
-        }
-
-        .info-text { font-size: 12px; line-height: 1.5; color: #efefef; }
-
-        .line-divider {
-            height: 1px;
-            width: 100%;
-            margin: 8px 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.3), transparent);
-        }
-
-        /* --- Buttons --- */
         .btn {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
             text-decoration: none;
             padding: 14px;
             border-radius: 12px;
             font-weight: 700;
             font-size: 11px;
             color: #fff;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 0, 0, 0.15);
-            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 0, 0, 0.2);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
         }
 
-        .btn.active {
-            background: linear-gradient(45deg, var(--deep-ruby), var(--royal-red)) !important;
-            border: none;
-            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        .btn:hover, .btn.active {
+            background: linear-gradient(45deg, #4a0000, #ff0000);
+            border-color: transparent;
+            transform: translateY(-2px);
         }
 
-        .back-btn { margin-top: 10px; background: #222; font-size: 10px; padding: 10px; width: 100%; }
-        
-        .bottom-section { 
-            margin-top: 15px; 
-            flex-shrink: 0; 
+        /* Info Area Customization */
+        .info-area {
+            display: none;
+            flex-direction: column;
+            text-align: left;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            height: 350px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .info-title {
+            color: var(--vip-gold);
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
             padding-bottom: 5px;
         }
-        
-        .social-row { display: flex; justify-content: center; gap: 20px; margin-bottom: 5px; }
-        .social-icon { color: #666; font-size: 16px; transition: 0.3s; }
-        .social-icon:hover { color: var(--vip-gold); }
-        .footer { font-size: 8px; color: #555; letter-spacing: 2px; font-weight: 700; }
 
-        /* ছোট মোবাইলের জন্য মিডিয়া কুয়েরি */
-        @media (max-height: 600px) {
-            .crown-icon { font-size: 35px; }
-            .logo-text { font-size: 18px; }
-            .card { padding: 15px; }
-            .btn { padding: 10px; font-size: 10px; }
-        }
+        .info-scroll { overflow-y: auto; flex-grow: 1; font-size: 13px; line-height: 1.6; }
+
+        .back-btn { margin-top: 10px; background: #222; font-size: 10px; padding: 10px; }
+
+        .bottom-section { margin-top: 20px; flex-shrink: 0; }
+        .social-row { display: flex; justify-content: center; gap: 20px; margin-bottom: 8px; }
+        .social-icon { color: #555; font-size: 16px; }
+        .footer { font-size: 9px; color: #444; letter-spacing: 2px; }
+
     </style>
 </head>
 <body>
 
-    <div class="bg-wrapper">
-        <div class="nebula"></div>
-    </div>
+    <div class="bg-wrapper"></div>
 
-    <div class="card" id="mainCard">
+    <div class="card">
         <div class="header-section" id="headerSection">
             <i class="fas fa-crown crown-icon"></i>
             <h1 class="logo-text">REJECTION<br>TRADE KING</h1>
         </div>
 
         <div class="content-body">
-            <!-- মেইন মেনু -->
             <div class="btn-group" id="btnGroup">
                 <a class="btn" href="https://t.me/RejectionTradeKing" target="_blank">
                     <i class="fab fa-telegram-plane"></i> JOIN PUBLIC CHANNEL
                 </a>
-
                 <a class="btn" href="https://broker-qx.pro/sign-up/?lid=1748587" target="_blank">
                     <i class="fas fa-gem"></i> OFFICIAL QUOTEX (VIP)
                 </a>
-
-                <a class="btn" href="javascript:void(0)" onclick="showArea('pinnedArea', this)">
+                <a class="btn" href="javascript:void(0)" onclick="showArea('pinnedArea')">
                     <i class="fas fa-thumbtack"></i> PINNED MESSAGE
                 </a>
-
-                <a class="btn" href="javascript:void(0)" onclick="showArea('policyArea', this)">
+                <a class="btn" href="javascript:void(0)" onclick="showArea('policyArea')">
                     <i class="fas fa-shield-alt"></i> VIP POLICY
                 </a>
-                
                 <a class="btn" href="https://t.me/LizaAkhtar1" target="_blank">
                     <i class="fas fa-headset"></i> HELPLINE
                 </a>
             </div>
 
-            <!-- PINNED MESSAGE -->
             <div class="info-area" id="pinnedArea">
-                <div class="info-title"><i class="fas fa-bullhorn"></i> VIP SERVICE INFO</div>
+                <div class="info-title">VIP SERVICE INFO</div>
                 <div class="info-scroll">
-                    <div class="info-text">
-                        আমাদের ট্রেডিং সার্ভিসে আপনাকে স্বাগতম। এখানে আমরা সর্বোচ্চ একুরেসি নিশ্চিত করি।
-                        <div class="line-divider"></div>
-                        🎯 <b>Daily Signals:</b> প্রতিদিন ৫-১০টি হাই-কোয়ালিটি সিগন্যাল প্রদান করি।
-                        <div class="line-divider"></div>
-                        💰 <b>Money Management:</b> আমরা আপনাকে সঠিক রিস্ক ম্যানেজমেন্ট শেখাবো।
-                        <div class="line-divider"></div>
-                        আমাদের ভিআইপি চ্যানেলে জয়েন করতে হলে নিচের লিঙ্ক থেকে একাউন্ট খুলে ন্যূনতম <b>৫০ ডলার ($50)</b> ডিপোজিট করে আমাদের হেল্পলাইনে মেসেজ দিন।
-                    </div>
+                    আমাদের ট্রেডিং সার্ভিসে আপনাকে স্বাগতম। এখানে আমরা সর্বোচ্চ একুরেসি নিশ্চিত করি।<br><br>
+                    🎯 <b>Daily Signals:</b> ৫-১০টি হাই-কোয়ালিটি সিগন্যাল।<br>
+                    💰 <b>Money Management:</b> সঠিক রিস্ক ম্যানেজমেন্ট গাইড।<br><br>
+                    ডিপোজিট করে আমাদের হেল্পলাইনে মেসেজ দিন।
                 </div>
                 <button class="btn back-btn" onclick="showButtons()">BACK TO MENU</button>
             </div>
 
-            <!-- POLICY -->
             <div class="info-area" id="policyArea">
-                <div class="info-title"><i class="fas fa-user-shield"></i> VIP RULES & POLICY</div>
+                <div class="info-title">VIP RULES & POLICY</div>
                 <div class="info-scroll">
-                    <div class="info-text">
-                        🛡️ <b>ভিআইপি লিংকের সুবিধা:</b> আমাদের ভিআইপি লিংক থেকে একাউন্ট করলে আপনি আমাদের টিমের সর্বোচ্চ অগ্রাধিকার পাবেন।
-                        <div class="line-divider"></div>
-                        🛠️ <b>সাপোর্ট ও সহযোগিতা:</b> আমাদের রুলস মেনে কাজ করলে একাউন্ট সংক্রান্ত যেকোনো সমস্যায় আমরা সহযোগিতা করব।
-                        <div class="line-divider"></div>
-                        ⚠️ <b>সতর্কবার্তা:</b> মানি ম্যানেজমেন্ট এবং আমাদের রুলস অমান্য করলে তার দায়ভার আমাদের টিম গ্রহণ করবে না।
-                    </div>
+                    🛡️ আমাদের ভিআইপি লিংক ব্যবহার করলে সর্বোচ্চ সাপোর্ট পাবেন।<br><br>
+                    ⚠️ মানি ম্যানেজমেন্ট অমান্য করলে লসের দায়ভার আপনার।
                 </div>
                 <button class="btn back-btn" onclick="showButtons()">BACK TO MENU</button>
             </div>
@@ -332,37 +222,16 @@
 
         <div class="bottom-section">
             <div class="social-row">
-                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                <i class="fab fa-youtube social-icon"></i>
+                <i class="fab fa-instagram social-icon"></i>
+                <i class="fab fa-discord social-icon"></i>
             </div>
             <div class="footer">ELITE EDITION &bull; 2026</div>
         </div>
     </div>
 
     <script>
-        // Ember Generator
-        const container = document.querySelector('.bg-wrapper');
-        for(let i=0; i<15; i++) {
-            let ember = document.createElement('div');
-            ember.className = 'ember';
-            let size = Math.random() * 3 + 2;
-            ember.style.width = size + 'px';
-            ember.style.height = size + 'px';
-            ember.style.left = Math.random() * 100 + 'vw';
-            ember.style.animationDelay = Math.random() * 10 + 's';
-            ember.style.animationDuration = Math.random() * 8 + 7 + 's';
-            container.appendChild(ember);
-        }
-
-        function activateBtn(element) {
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            if(element) element.classList.add('active');
-        }
-
-        function showArea(areaId, element) {
-            activateBtn(element);
+        function showArea(areaId) {
             document.getElementById('headerSection').classList.add('shrunk');
             document.getElementById('btnGroup').style.display = 'none';
             document.getElementById('pinnedArea').style.display = 'none';
@@ -375,9 +244,7 @@
             document.getElementById('pinnedArea').style.display = 'none';
             document.getElementById('policyArea').style.display = 'none';
             document.getElementById('btnGroup').style.display = 'flex';
-            activateBtn(null);
         }
     </script>
-
 </body>
 </html>

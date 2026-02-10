@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>REJECTION Trade King 👑 | Royal VIP Edition</title>
     
     <!-- Google Fonts -->
@@ -19,302 +19,230 @@
             --bg-black: #050000;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            cursor: default;
+        /* --- Global Lock & Anti-Stretch --- */
+        html, body {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden; 
+            overscroll-behavior: none; 
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: none; 
         }
+
+        * { box-sizing: border-box; cursor: default; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-black);
-            min-height: 100dvh;
-            display: flex;
-            justify-content: center;
-            /* কার্ডের পজিশন মাঝামাঝি থেকে একটু উপরে রাখার জন্য */
-            align-items: center; 
-            overflow: hidden;
+            display: flex; justify-content: center; align-items: center; 
             color: white;
-            padding: 45px 0;
         }
 
         /* --- Background Animation --- */
         .bg-wrapper {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #1a0000 0%, #000 100%);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; background: radial-gradient(circle at center, #1a0000 0%, #000 100%);
         }
 
         .nebula {
-            position: absolute;
-            width: 150%; height: 150%;
-            top: -25%; left: -25%;
+            position: absolute; width: 150%; height: 150%; top: -25%; left: -25%;
             background: radial-gradient(circle at 50% 50%, rgba(255, 0, 0, 0.12) 0%, rgba(74, 0, 0, 0.05) 40%, transparent 70%);
-            filter: blur(60px);
-            animation: moveNebula 15s infinite alternate ease-in-out;
+            filter: blur(60px); animation: moveNebula 15s infinite alternate ease-in-out;
         }
 
-        @keyframes moveNebula {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(-5%, -5%) scale(1.1); }
-        }
+        @keyframes moveNebula { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-5%, -5%) scale(1.1); } }
 
         .ember {
-            position: absolute;
-            background: var(--royal-red);
-            border-radius: 50%;
+            position: absolute; background: var(--royal-red); border-radius: 50%;
             filter: blur(2px) drop-shadow(0 0 5px var(--royal-red));
-            animation: fly 10s infinite linear;
-            opacity: 0;
+            animation: fly 10s infinite linear; opacity: 0;
         }
 
         @keyframes fly {
             0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.6; }
-            100% { transform: translateY(-20vh) translateX(100px); opacity: 0; }
+            20% { opacity: 0.6; } 100% { transform: translateY(-20vh) translateX(100px); opacity: 0; }
         }
 
-        /* --- VIP Card (Fixed 650px) --- */
+        /* --- VIP Card --- */
         .card {
-            width: 90%;
-            max-width: 420px;
-            height: 650px; 
-            max-height: 95dvh; /* ছোট স্ক্রিনে স্ক্রিনের বাইরে যাওয়া ঠেকাবে */
-            padding: 25px 25px;
-            border-radius: 60px 15px 60px 15px;
+            width: 90%; max-width: 420px; height: 650px; max-height: 90vh;
+            padding: 20px 25px; border-radius: 60px 15px 60px 15px;
             background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.6) 100%);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 0, 0, 0.25);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.9);
-            text-align: center;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transition: all 0.5s ease;
-            /* হালকা উপরে উঠিয়ে দেওয়ার জন্য */
-            transform: translateY(-20px); 
+            backdrop-filter: blur(30px); border: 1px solid rgba(255, 0, 0, 0.25);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.9); text-align: center;
+            position: relative; display: flex; flex-direction: column; overflow: hidden;
+            transition: all 0.5s ease; transform: translateY(-5px); touch-action: manipulation;
         }
 
         .card::before {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            border-radius: 62px 17px 62px 17px;
+            content: ""; position: absolute; inset: -2px; border-radius: 62px 17px 62px 17px;
             background: linear-gradient(45deg, transparent, var(--royal-red), transparent, var(--vip-gold), transparent);
-            z-index: -1;
-            animation: borderRotate 8s infinite linear;
-            opacity: 0.4;
+            z-index: -1; animation: borderRotate 8s infinite linear; opacity: 0.4;
         }
 
         @keyframes borderRotate { 100% { filter: hue-rotate(360deg); } }
 
-        /* --- Logo & Header Animation --- */
-        .header-section {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-bottom: 10px;
+        /* --- Visitor Counter --- */
+        .card-visitor-counter {
+            position: absolute; top: 12px; right: 15px;
+            display: flex; align-items: center; gap: 5px;
+            font-size: 10px; color: var(--vip-gold); font-weight: 600; 
+            opacity: 0.6; z-index: 10;
+            background: rgba(0, 0, 0, 0.4); padding: 2px 8px; border-radius: 20px;
         }
 
+        /* --- Header Section --- */
+        .header-section {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 0px;
+            margin-bottom: 20px;
+        }
+
+        /* যখন বক্স ওপেন হবে */
         .header-section.shrunk {
-            transform: scale(0.75);
-            margin-top: -15px;
+            transform: scale(0.65); /* লোগো মডারেট সাইজ */
+            margin-top: -20px; /* লোগো খুব বেশি উপরে উঠবে না */
             margin-bottom: 5px;
         }
 
+        .header-section.shrunk .header-bio {
+            display: none; /* বায়ো হাইড হবে */
+        }
+
         .crown-icon {
-            font-size: 50px;
-            background: linear-gradient(to bottom, var(--soft-gold), var(--vip-gold), #b8860b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 50px; background: linear-gradient(to bottom, var(--soft-gold), var(--vip-gold), #b8860b);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
-            /* এখানে এনিমেশনটি আবার যোগ করা হয়েছে */
             animation: royalFloat 3s infinite ease-in-out;
         }
 
-        @keyframes royalFloat {
-            0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); }
-            50% { transform: translateY(-12px) scale(1.05); filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8)); }
-        }
+        @keyframes royalFloat { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(1.05); } }
 
         .logo-text {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 26px;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
-            margin-top: 5px;
-            animation: textGlow 4s infinite alternate;
+            font-family: 'Cinzel Decorative', serif; font-size: 26px; font-weight: 900;
+            color: #fff; text-shadow: 0 0 15px rgba(255, 0, 0, 0.6); margin-top: 5px;
         }
 
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
-            100% { text-shadow: 0 0 20px rgba(255, 0, 0, 0.9), 0 0 30px rgba(255, 215, 0, 0.3); }
+        .header-bio {
+            font-size: 9px; color: var(--soft-gold); letter-spacing: 2px;
+            font-weight: 600; text-transform: uppercase; margin-top: 8px;
+            opacity: 0.8; font-family: 'Outfit', sans-serif;
+            display: inline-block; border-top: 1px solid rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2); padding: 4px 10px;
         }
 
         /* --- Content Layout --- */
-        .content-body {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .content-body { 
+            flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; 
         }
 
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
 
-        .line-divider {
-            height: 1px;
-            width: 80%;
-            margin: 10px auto;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.4), transparent);
-        }
-
+        /* --- Info Area (Positioned Closer to Name) --- */
         .info-area {
             display: none; 
-            flex-direction: column;
-            text-align: left;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 20px;
-            border-radius: 25px;
+            flex-direction: column; 
+            text-align: left; 
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px; 
+            border-radius: 25px; 
             border: 1px solid rgba(255, 0, 0, 0.3);
-            height: 440px;
-            animation: slideUp 0.5s ease forwards;
+            height: 470px; 
+            margin-top: -15px; /* বক্সটিকে টেনে নামের কাছাকাছি আনা হয়েছে */
+            animation: slideUpFade 0.4s ease-out forwards;
+            position: relative; z-index: 5;
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideUpFade { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
         }
 
         .info-title {
-            color: var(--vip-gold);
-            font-weight: 800;
-            font-size: 16px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
-            padding-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            color: var(--vip-gold); font-weight: 800; font-size: 16px; margin-bottom: 12px;
+            text-transform: uppercase; border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 8px; display: flex; align-items: center; gap: 10px;
         }
 
-        .info-scroll {
-            overflow-y: auto;
-            flex-grow: 1;
-            padding-right: 8px;
-        }
-
+        .info-scroll { overflow-y: auto; flex-grow: 1; padding-right: 8px; touch-action: pan-y; }
         .info-scroll::-webkit-scrollbar { width: 3px; }
         .info-scroll::-webkit-scrollbar-thumb { background: var(--royal-red); }
-
         .info-text { font-size: 13px; line-height: 1.6; color: #efefef; }
 
+        .line-divider {
+            height: 1px; width: 80%; margin: 10px auto;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.4), transparent);
+        }
+
         .inline-link-btn {
-            display: inline-flex;
-            padding: 2px 8px;
-            background: linear-gradient(45deg, #ffd700, #b8860b);
-            color: #000;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 900;
-            text-decoration: none;
-            margin: 0 3px;
-            vertical-align: middle;
+            display: inline-flex; padding: 2px 8px; background: linear-gradient(45deg, #ffd700, #b8860b);
+            color: #000; border-radius: 4px; font-size: 10px; font-weight: 900;
+            text-decoration: none; margin: 0 3px; vertical-align: middle;
         }
 
         /* --- Buttons --- */
         .btn {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            padding: 16px;
-            border-radius: 15px;
-            font-weight: 700;
-            font-size: 12px;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 0, 0, 0.15);
-            transition: 0.4s;
-            text-transform: uppercase;
+            position: relative; display: flex; align-items: center; justify-content: center;
+            gap: 10px; text-decoration: none; padding: 16px; border-radius: 15px;
+            font-weight: 700; font-size: 12px; color: #fff; background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 0, 0, 0.15); transition: 0.4s; text-transform: uppercase;
         }
 
-        .btn.active {
-            background: linear-gradient(45deg, var(--deep-ruby), var(--royal-red)) !important;
-            border: none;
-            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            border-color: var(--vip-gold);
-            background: rgba(255, 0, 0, 0.1);
-        }
-
-        .back-btn { margin-top: 15px; background: #222; font-size: 10px; padding: 12px; width: 100%; }
-        .bottom-section { margin-top: 15px; }
-        .social-row { display: flex; justify-content: center; gap: 25px; margin-bottom: 8px; }
+        .btn.active { background: linear-gradient(45deg, var(--deep-ruby), var(--royal-red)) !important; }
+        .back-btn { margin-top: 10px; background: #222; font-size: 10px; padding: 12px; width: 100%; border-radius: 12px; border: 1px solid #444; }
+        
+        /* --- Bottom --- */
+        .bottom-section { margin-top: auto; padding-bottom: 5px; }
+        .social-row { display: flex; justify-content: center; gap: 25px; margin-bottom: 10px; }
         .social-icon { color: #555; font-size: 18px; }
-        .footer { font-size: 9px; color: #444; letter-spacing: 3px; font-weight: 700; }
+        .footer { font-size: 9px; color: #444; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
     <div class="bg-wrapper">
         <div class="nebula"></div>
         <script>
-            const container = document.querySelector('.bg-wrapper');
+            const bg = document.querySelector('.bg-wrapper');
             for(let i=0; i<20; i++) {
-                let ember = document.createElement('div');
-                ember.className = 'ember';
-                let size = Math.random() * 3 + 2;
-                ember.style.width = size + 'px';
-                ember.style.height = size + 'px';
-                ember.style.left = Math.random() * 100 + 'vw';
-                ember.style.animationDelay = Math.random() * 10 + 's';
-                ember.style.animationDuration = Math.random() * 8 + 7 + 's';
-                container.appendChild(ember);
+                let e = document.createElement('div'); e.className = 'ember';
+                let s = Math.random() * 3 + 2; e.style.width = s + 'px'; e.style.height = s + 'px';
+                e.style.left = Math.random() * 100 + 'vw';
+                e.style.animationDelay = Math.random() * 10 + 's';
+                e.style.animationDuration = Math.random() * 8 + 7 + 's';
+                bg.appendChild(e);
             }
         </script>
     </div>
 
+    <!-- Main Card -->
     <div class="card" id="mainCard">
+        <div class="card-visitor-counter">
+            <i class="fas fa-eye"></i>
+            <span id="v-count">...</span>
+        </div>
+
         <div class="header-section" id="headerSection">
             <i class="fas fa-crown crown-icon"></i>
             <h1 class="logo-text">REJECTION<br>TRADE KING</h1>
+            <div class="header-bio">Precision & Strategy Define Our Kingdom</div>
         </div>
 
-        <div class="content-body">
-            <!-- মেইন মেনু -->
+        <div class="content-body" id="contentBody">
             <div class="btn-group" id="btnGroup">
                 <a class="btn" href="https://t.me/RejectionTradeKing" target="_blank" onclick="activateBtn(this)">
                     <i class="fab fa-telegram-plane"></i> JOIN PUBLIC CHANNEL
                 </a>
-
                 <a class="btn" href="https://broker-qx.pro/sign-up/?lid=1748587" target="_blank" onclick="activateBtn(this)">
                     <i class="fas fa-gem"></i> OFFICIAL QUOTEX (VIP)
                 </a>
-
                 <a class="btn" href="javascript:void(0)" onclick="showArea('pinnedArea', this)">
                     <i class="fas fa-thumbtack"></i> PINNED MESSAGE
                 </a>
-
                 <a class="btn" href="javascript:void(0)" onclick="showArea('policyArea', this)">
                     <i class="fas fa-shield-alt"></i> VIP POLICY
                 </a>
-                
                 <a class="btn" href="https://t.me/LizaAkhtar1" target="_blank" onclick="activateBtn(this)">
                     <i class="fas fa-headset"></i> HELPLINE
                 </a>
@@ -368,31 +296,46 @@
     </div>
 
     <script>
-        function activateBtn(element) {
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            if(element) element.classList.add('active');
-        }
+        // Security logic
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && [187,189,107,109,80,85,67,123].includes(e.keyCode)) e.preventDefault();
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && [73,74].includes(e.keyCode))) e.preventDefault();
+        });
+        document.addEventListener('wheel', e => { if (e.ctrlKey) e.preventDefault(); }, { passive: false });
 
-        function showArea(areaId, element) {
-            activateBtn(element);
+        // Navigation logic
+        function activateBtn(el) {
+            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+            if(el) el.classList.add('active');
+        }
+        function showArea(id, el) {
+            activateBtn(el);
             setTimeout(() => {
                 document.getElementById('headerSection').classList.add('shrunk');
                 document.getElementById('btnGroup').style.display = 'none';
-                document.getElementById('pinnedArea').style.display = 'none';
-                document.getElementById('policyArea').style.display = 'none';
-                document.getElementById(areaId).style.display = 'flex';
+                document.getElementById(id).style.display = 'flex';
             }, 150);
         }
-
         function showButtons() {
             document.getElementById('headerSection').classList.remove('shrunk');
-            document.getElementById('pinnedArea').style.display = 'none';
-            document.getElementById('policyArea').style.display = 'none';
+            document.querySelectorAll('.info-area').forEach(a => a.style.display = 'none');
             document.getElementById('btnGroup').style.display = 'flex';
             activateBtn(null);
         }
-    </script>
 
+        // Counter logic
+        const COUNTER_KEY = 'rejection_tk_unique_v12';
+        const API_URL = 'https://api.counterapi.dev/v1/rejection_trade_king/visitors';
+        async function initCounter() {
+            const v = document.getElementById('v-count');
+            const h = localStorage.getItem(COUNTER_KEY);
+            try {
+                const r = await fetch(h ? API_URL : `${API_URL}/up`);
+                const d = await r.json(); v.innerText = d.count;
+                if(!h) localStorage.setItem(COUNTER_KEY, '1');
+            } catch(e) { v.innerText = "1"; }
+        }
+        window.onload = initCounter;
+    </script>
 </body>
 </html>

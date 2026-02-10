@@ -29,17 +29,16 @@
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-black);
-            min-height: 100dvh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            /* কার্ডের পজিশন মাঝামাঝি থেকে একটু উপরে রাখার জন্য */
-            align-items: center; 
+            align-items: center;
             overflow: hidden;
             color: white;
-            padding: 45px 0;
+            padding: 2px 0;
         }
 
-        /* --- Background Animation (Original) --- */
+        /* --- Background Animation --- */
         .bg-wrapper {
             position: fixed;
             top: 0; left: 0;
@@ -78,13 +77,12 @@
             100% { transform: translateY(-20vh) translateX(100px); opacity: 0; }
         }
 
-        /* --- VIP Card (Original Style with Adjusted Positioning) --- */
+        /* --- VIP Card (Fixed 650px) --- */
         .card {
             width: 90%;
-            max-width: 420px;
-            height: 650px; 
-            max-height: 95dvh; /* ছোট স্ক্রিনে স্ক্রিনের বাইরে যাওয়া ঠেকাবে */
-            padding: 25px 25px;
+            max-width: 450px;
+            height: 600px; 
+            padding: 30px 25px;
             border-radius: 60px 15px 60px 15px;
             background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.6) 100%);
             backdrop-filter: blur(30px);
@@ -97,12 +95,7 @@
             flex-direction: column;
             overflow: hidden;
             transition: all 0.5s ease;
-            /* হালকা উপরে উঠিয়ে দেওয়ার জন্য */
-            transform: translateY(-20px); 
         }
-
-        /* স্ক্রলবার লুকানোর জন্য */
-        .card::-webkit-scrollbar { display: none; }
 
         .card::before {
             content: "";
@@ -117,11 +110,10 @@
 
         @keyframes borderRotate { 100% { filter: hue-rotate(360deg); } }
 
-        /* --- Header Section --- */
+        /* --- Logo & Header Animation --- */
         .header-section {
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-bottom: 15px;
-            flex-shrink: 0;
+            margin-bottom: 10px;
         }
 
         .header-section.shrunk {
@@ -136,12 +128,13 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
+            /* এখানে এনিমেশনটি আবার যোগ করা হয়েছে */
             animation: royalFloat 3s infinite ease-in-out;
         }
 
         @keyframes royalFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5)); }
+            50% { transform: translateY(-12px) scale(1.05); filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8)); }
         }
 
         .logo-text {
@@ -156,7 +149,7 @@
 
         @keyframes textGlow {
             0% { text-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
-            100% { text-shadow: 0 0 20px rgba(255, 0, 0, 0.9); }
+            100% { text-shadow: 0 0 20px rgba(255, 0, 0, 0.9), 0 0 30px rgba(255, 215, 0, 0.3); }
         }
 
         /* --- Content Layout --- */
@@ -165,9 +158,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            overflow-y: auto; /* কন্টেন্ট বেশি হলে ভেতরে স্ক্রল হবে */
         }
-        .content-body::-webkit-scrollbar { display: none; }
 
         .btn-group {
             display: flex;
@@ -213,11 +204,29 @@
             gap: 10px;
         }
 
-        .info-scroll { overflow-y: auto; flex-grow: 1; padding-right: 8px; }
+        .info-scroll {
+            overflow-y: auto;
+            flex-grow: 1;
+            padding-right: 8px;
+        }
+
         .info-scroll::-webkit-scrollbar { width: 3px; }
         .info-scroll::-webkit-scrollbar-thumb { background: var(--royal-red); }
 
         .info-text { font-size: 13px; line-height: 1.6; color: #efefef; }
+
+        .inline-link-btn {
+            display: inline-flex;
+            padding: 2px 8px;
+            background: linear-gradient(45deg, #ffd700, #b8860b);
+            color: #000;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 900;
+            text-decoration: none;
+            margin: 0 3px;
+            vertical-align: middle;
+        }
 
         /* --- Buttons --- */
         .btn {
@@ -251,7 +260,7 @@
         }
 
         .back-btn { margin-top: 15px; background: #222; font-size: 10px; padding: 12px; width: 100%; }
-        .bottom-section { margin-top: 15px; flex-shrink: 0; }
+        .bottom-section { margin-top: 15px; }
         .social-row { display: flex; justify-content: center; gap: 25px; margin-bottom: 8px; }
         .social-icon { color: #555; font-size: 18px; }
         .footer { font-size: 9px; color: #444; letter-spacing: 3px; font-weight: 700; }
@@ -284,20 +293,25 @@
         </div>
 
         <div class="content-body">
+            <!-- মেইন মেনু -->
             <div class="btn-group" id="btnGroup">
-                <a class="btn" href="https://t.me/RejectionTradeKing" target="_blank">
+                <a class="btn" href="https://t.me/RejectionTradeKing" target="_blank" onclick="activateBtn(this)">
                     <i class="fab fa-telegram-plane"></i> JOIN PUBLIC CHANNEL
                 </a>
-                <a class="btn" href="https://broker-qx.pro/sign-up/?lid=1748587" target="_blank">
+
+                <a class="btn" href="https://broker-qx.pro/sign-up/?lid=1748587" target="_blank" onclick="activateBtn(this)">
                     <i class="fas fa-gem"></i> OFFICIAL QUOTEX (VIP)
                 </a>
+
                 <a class="btn" href="javascript:void(0)" onclick="showArea('pinnedArea', this)">
                     <i class="fas fa-thumbtack"></i> PINNED MESSAGE
                 </a>
+
                 <a class="btn" href="javascript:void(0)" onclick="showArea('policyArea', this)">
                     <i class="fas fa-shield-alt"></i> VIP POLICY
                 </a>
-                <a class="btn" href="https://t.me/LizaAkhtar1" target="_blank">
+                
+                <a class="btn" href="https://t.me/LizaAkhtar1" target="_blank" onclick="activateBtn(this)">
                     <i class="fas fa-headset"></i> HELPLINE
                 </a>
             </div>
@@ -312,6 +326,10 @@
                         🎯 <b>Daily Signals:</b> প্রতিদিন ৫-১০টি হাই-কোয়ালিটি সিগন্যাল প্রদান করি।
                         <div class="line-divider"></div>
                         💰 <b>Money Management:</b> আমরা আপনাকে সঠিক রিস্ক ম্যানেজমেন্ট শেখাবো।
+                        <div class="line-divider"></div>
+                        আমাদের ভিআইপি <b>চ্যানেলে</b> জয়েন করতে হলে নিচের দেওয়া অফিসিয়াল কোটেক্স 
+                        <a href="https://broker-qx.pro/sign-up/?lid=1748587" class="inline-link-btn" target="_blank">LINK</a> 
+                        থেকে একাউন্ট খুলে ন্যূনতম <b>৫০ ডলার ($50)</b> ডিপোজিট করে আমাদের হেল্পলাইনে মেসেজ দিন।
                     </div>
                 </div>
                 <button class="btn back-btn" onclick="showButtons()">BACK TO MENU</button>
@@ -324,7 +342,11 @@
                     <div class="info-text">
                         🛡️ <b>ভিআইপি লিংকের সুবিধা:</b> আমাদের ভিআইপি লিংক থেকে একাউন্ট করলে আপনি আমাদের টিমের সর্বোচ্চ অগ্রাধিকার পাবেন।
                         <div class="line-divider"></div>
-                        ⚠️ <b>সতর্কবার্তা:</b> মানি ম্যানেজমেন্ট অমান্য করে লস করলে তার দায়ভার আমাদের টিম গ্রহণ করবে না।
+                        🛠️ <b>সাপোর্ট ও সহযোগিতা:</b> আমাদের রুলস মেনে কাজ করলে কোটেক্স একাউন্ট বা বিন্যান্স সংক্রান্ত যেকোনো সমস্যায় আমাদের টিম আপনাকে সরাসরি সহযোগিতা করবে।
+                        <div class="line-divider"></div>
+                        ♻️ <b>রিফান্ড ও রিকভারি:</b> আমাদের সিগন্যাল এবং রুলস মেনে ট্রেড করার পরেও যদি কোনো লস হয়, তবে আমরা তা যাচাই করে রিফান্ড অথবা রিকভারি করে দেওয়ার নিশ্চয়তা দিচ্ছি।
+                        <div class="line-divider"></div>
+                        ⚠️ <b>সতর্কবার্তা:</b> মানি ম্যানেজমেন্ট এবং আমাদের রুলস অমান্য করে লস করলে বা সমস্যায় পড়লে তার দায়ভার আমাদের টিম গ্রহণ করবে না।
                     </div>
                 </div>
                 <button class="btn back-btn" onclick="showButtons()">BACK TO MENU</button>
@@ -350,11 +372,13 @@
 
         function showArea(areaId, element) {
             activateBtn(element);
-            document.getElementById('headerSection').classList.add('shrunk');
-            document.getElementById('btnGroup').style.display = 'none';
-            document.getElementById('pinnedArea').style.display = 'none';
-            document.getElementById('policyArea').style.display = 'none';
-            document.getElementById(areaId).style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('headerSection').classList.add('shrunk');
+                document.getElementById('btnGroup').style.display = 'none';
+                document.getElementById('pinnedArea').style.display = 'none';
+                document.getElementById('policyArea').style.display = 'none';
+                document.getElementById(areaId).style.display = 'flex';
+            }, 150);
         }
 
         function showButtons() {

@@ -29,13 +29,14 @@
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-black);
-            min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             justify-content: center;
-            align-items: center;
+            /* কার্ডের পজিশন মাঝামাঝি থেকে একটু উপরে রাখার জন্য */
+            align-items: center; 
             overflow: hidden;
             color: white;
-            padding: 5px 0;
+            padding: 45px 0;
         }
 
         /* --- Background Animation --- */
@@ -80,9 +81,10 @@
         /* --- VIP Card (Fixed 650px) --- */
         .card {
             width: 90%;
-            max-width: 450px;
-            height: 630px; 
-            padding: 30px 25px;
+            max-width: 420px;
+            height: 650px; 
+            max-height: 95dvh; /* ছোট স্ক্রিনে স্ক্রিনের বাইরে যাওয়া ঠেকাবে */
+            padding: 25px 25px;
             border-radius: 60px 15px 60px 15px;
             background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.6) 100%);
             backdrop-filter: blur(30px);
@@ -95,6 +97,8 @@
             flex-direction: column;
             overflow: hidden;
             transition: all 0.5s ease;
+            /* হালকা উপরে উঠিয়ে দেওয়ার জন্য */
+            transform: translateY(-20px); 
         }
 
         .card::before {
